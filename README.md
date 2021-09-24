@@ -79,6 +79,6 @@ postman :
 }
 
 Add Entity Role
-Add UserInterface at User
+Add UserInterface, PasswordAuthenticatedUserInterface dans User
 
 Ajouter  make:auth

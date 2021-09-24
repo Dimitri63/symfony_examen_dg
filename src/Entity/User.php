@@ -49,12 +49,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
      */
-    private $Roles;
+    private $roles;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
-        $this->Roles = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
