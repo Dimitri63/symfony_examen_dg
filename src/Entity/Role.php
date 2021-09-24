@@ -39,6 +39,11 @@ class Role
         return $this->id;
     }
 
+    public function getName(): ?string
+    {
+        return $this->role;
+    }
+
     public function getRole(): ?string
     {
         return $this->role;
