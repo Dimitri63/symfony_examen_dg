@@ -2,6 +2,9 @@
 
 controller home <br>
 template bootstrap<br>
+Ajout du template Bootstrap 'Shop'<br>
+https://startbootstrap.com/template/shop-item
+
 make:entity => Product <br>
 
 - Product
@@ -74,3 +77,8 @@ postman :
 "img3" : "chau0003.jpeg",
 "user" : 1
 }
+
+Add Entity Role
+Add UserInterface at User
+
+Ajouter  make:auth
