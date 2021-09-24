@@ -135,12 +135,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/version" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug-pack" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer-pack" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/orm-pack" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-pack" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/test-pack" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/profiler-pack" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
