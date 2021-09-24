@@ -22,7 +22,7 @@ make:controller => Home<br>
   - method => getAllProduct
 
 make:controller => ApiRest<br>
-- [Route('/api/product', name: 'postNewProduct', methods: 'POST')]
+#[Route('/api/product', name: 'postNewProduct', methods: 'POST')]
 postman : 
 {
   "name" : "basket homme",
@@ -48,6 +48,15 @@ postman :
 
 Modifier entity Product
   - Client - <small>Entity=User</small></li>
+  - updated: src/Entity/Product.php
+  - updated: src/Entity/User.php
 
-- updated: src/Entity/Product.php
-- updated: src/Entity/User.php
+make:controller => PublicRest<br>
+#[Route('/public/user', name: 'postNewUser', methods: 'POST')]
+  postman :
+  {
+  "name" : "DGnex",
+  "surname" : "NEXUS",
+  "email" : "dgnex@mail.com",
+  "password" : "1234"
+  }
