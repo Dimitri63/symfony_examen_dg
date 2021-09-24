@@ -4,7 +4,7 @@ controller home <br>
 template bootstrap<br>
 make:entity => Product <br>
 
-- product
+- Product
     - id - <small>integer</small>
     - name - <small>string</small>
     - imgMiniature - <small>string</small>
@@ -22,7 +22,7 @@ make:controller => Home<br>
   - method => getAllProduct
 
 make:controller => ApiRest<br>
-- [Route('/api/product', name: 'postNewProduct', methods: 'POST')]
+#[Route('/api/product', name: 'postNewProduct', methods: 'POST')]
 postman : 
 {
   "name" : "basket homme",
@@ -37,3 +37,26 @@ postman :
 - Configure viariable global pour les image
 - globals:
   image_dir: 'assets/img/upload/'
+  make:entity => Product <br>
+
+- User
+  - id - <small>integer</small>
+  - name - <small>string</small>
+  - surname - <small>string</small>
+  - email - <small>float</small>
+  - password - <small>datetime</small>
+
+Modifier entity Product
+  - Client - <small>Entity=User</small></li>
+  - updated: src/Entity/Product.php
+  - updated: src/Entity/User.php
+
+make:controller => PublicRest<br>
+#[Route('/public/user', name: 'postNewUser', methods: 'POST')]
+  postman :
+  {
+  "name" : "DGnex",
+  "surname" : "NEXUS",
+  "email" : "dgnex@mail.com",
+  "password" : "1234"
+  }
