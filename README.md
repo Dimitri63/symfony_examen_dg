@@ -82,3 +82,6 @@ Add Entity Role
 Add UserInterface, PasswordAuthenticatedUserInterface dans User
 
 Ajouter  make:auth
+
+modifier publicRestController Add user
+
