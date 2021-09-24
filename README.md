@@ -45,3 +45,9 @@ postman :
   - surname - <small>string</small>
   - email - <small>float</small>
   - password - <small>datetime</small>
+
+Modifier entity Product
+  - Client - <small>Entity=User</small></li>
+
+- updated: src/Entity/Product.php
+- updated: src/Entity/User.php
