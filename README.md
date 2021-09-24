@@ -60,3 +60,17 @@ make:controller => PublicRest<br>
   "email" : "dgnex@mail.com",
   "password" : "1234"
   }
+
+Modifier addProduct => ++user
+postman :
+{
+"name" : "basket homme",
+"img_miniature" : "chau0000.png",
+"price" : "80.00",
+"added_at" : "2021-12-12",
+"isOnline" : true,
+"img1" : "chau0001.jpeg",
+"img2" : "chau0002.jpeg",
+"img3" : "chau0003.jpeg",
+"user" : 1
+}

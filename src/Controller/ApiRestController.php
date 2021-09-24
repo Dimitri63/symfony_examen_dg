@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +24,7 @@ class ApiRestController extends AbstractController
      * @throws \Exception
      */
     #[Route('/api/product', name: 'postNewProduct', methods: 'POST')]
-    public function postNewProduct(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer): JsonResponse
+    public function postNewProduct(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, UserRepository $userRepository): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -36,6 +37,9 @@ class ApiRestController extends AbstractController
         $product->setImg1($data['img1']);
         $product->setImg2($data['img2']);
         $product->setImg3($data['img3']);
+
+        $user = $userRepository->find($data['user']);
+        $product->setUser($user);
 
         $entityManager->persist($product);
         $entityManager->flush();
