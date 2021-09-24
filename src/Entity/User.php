@@ -44,9 +44,15 @@ class User
      */
     private $products;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Role::class, inversedBy="users")
+     */
+    private $Roles;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->Roles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,6 +134,30 @@ class User
                 $product->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Role[]
+     */
+    public function getRoles(): Collection
+    {
+        return $this->Roles;
+    }
+
+    public function addRole(Role $role): self
+    {
+        if (!$this->Roles->contains($role)) {
+            $this->Roles[] = $role;
+        }
+
+        return $this;
+    }
+
+    public function removeRole(Role $role): self
+    {
+        $this->Roles->removeElement($role);
 
         return $this;
     }
