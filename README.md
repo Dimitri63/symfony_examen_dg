@@ -4,7 +4,7 @@ controller home <br>
 template bootstrap<br>
 make:entity => Product <br>
 
-- product
+- Product
     - id - <small>integer</small>
     - name - <small>string</small>
     - imgMiniature - <small>string</small>
@@ -37,3 +37,11 @@ postman :
 - Configure viariable global pour les image
 - globals:
   image_dir: 'assets/img/upload/'
+  make:entity => Product <br>
+
+- User
+  - id - <small>integer</small>
+  - name - <small>string</small>
+  - surname - <small>string</small>
+  - email - <small>float</small>
+  - password - <small>datetime</small>
