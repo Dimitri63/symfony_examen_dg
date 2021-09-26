@@ -96,6 +96,9 @@ Ajouter make:controller<br>
 - Methode /user/register
 => Récupérer et interpréter les données du formulaire 
 
+Ajouter un produit<br>
+
+
 
 
 Modifier 
