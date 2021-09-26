@@ -11,11 +11,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
     #[Route('/user/register', name: 'user_register',methods: 'POST')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, RoleRepository $roleRepository): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManager, RoleRepository $roleRepository): Response
     {
         $user = new User();
         $userForm = $this->createForm(UserRegisterType::class, $user);
@@ -28,8 +29,18 @@ class UserController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_login');
         }
 
-        return $this->redirectToRoute('app_login');
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'userForm' => $userForm->createView()]);
     }
 }

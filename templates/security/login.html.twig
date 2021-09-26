@@ -54,9 +54,6 @@
                         {{ form_widget(userForm.surname) }}
                         <div class="alert-danger">{{ form_errors(userForm.surname) }}</div>
                     </div>
-                    {% if form_errors(userForm.email) is not empty %}
-                        <a class="btn btn-outline-info" href="{{ path('passwordForget') }}">Mot de passe oublié</a>
-                    {% endif %}
                     {{ form_row(userForm.save) }}
                     {{ form_end(userForm) }}
                 </form>
