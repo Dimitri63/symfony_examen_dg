@@ -1,20 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {%  include('include/nav.html.twig') %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <dic class="col-sm-6">
+                <h3>Ajouter un produit</h3>
+                {{ form_start(productForm) }}
+                <div class="form-group">
+                    {{ form_label(productForm.name) }}
+                    {{ form_widget(productForm.name) }}
+                    <div class="alert-danger">{{ form_errors(productForm.name) }}</div>
+                </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <div class="form-group">
+                    {{ form_label(productForm.imgMiniature) }}
+                    {{ form_widget(productForm.imgMiniature) }}
+                    <div class="alert-danger">{{ form_errors(productForm.imgMiniature) }}</div>
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Users/DGnex/Documents/Formation_CDA/Cours/labs/synfony/examen_symfony/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Users/DGnex/Documents/Formation_CDA/Cours/labs/synfony/examen_symfony/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <div class="form-group">
+                    {{ form_label(productForm.price) }}
+                    {{ form_widget(productForm.price) }}
+                    <div class="alert-danger">{{ form_errors(productForm.price) }}</div>
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(productForm.description) }}
+                    {{ form_widget(productForm.description) }}
+                    <div class="alert-danger">{{ form_errors(productForm.description) }}</div>
+                </div>
+
+                <div class="form-group form-check">
+                    {{ form_label(productForm.isOnline) }}
+                    {{ form_widget(productForm.isOnline) }}
+                    <div class="alert-danger">{{ form_errors(productForm.isOnline) }}</div>
+                </div>
+
+
+                {{ form_end(productForm) }}
+            </dic>
+        </div>
+    </div>
 {% endblock %}
