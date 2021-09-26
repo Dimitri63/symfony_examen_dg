@@ -14,7 +14,6 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        dd($authenticationUtils->getLastUsername());
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
         }
@@ -28,10 +27,17 @@ class SecurityController extends AbstractController
     }
 
     /**
+     * @Route("user/password_forget", name="passwordForget")
+     */
+    public function passwordForget() {
+        return $this->redirectToRoute('app_login');
+    }
+
+    /**
      * @Route("/logout", name="app_logout")
      */
     public function logout()
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        return $this->redirectToRoute('app_login');
     }
 }
