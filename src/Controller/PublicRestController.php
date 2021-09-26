@@ -81,6 +81,4 @@ class PublicRestController extends AbstractController
 
         return new JsonResponse($users, 200, [], true);
     }
-
-   //INSERT INTO `role` (`id`, `role`) VALUES (NULL, 'ROLE_USER'), (NULL, 'ROLE_MODERATOR'), (NULL, 'ROLE_ADMIN');
 }
