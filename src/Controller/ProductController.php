@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductFormType;
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\Types\This;
@@ -47,5 +48,19 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'productForm' => $productForm->createView(),
         ]);
+    }
+
+    #[Route('app/product/toggle_status/{productId}', name: 'toggleStatus')]
+    public function toggleStatus(int $productId, ProductRepository $productRepository, EntityManagerInterface $entityManager) {
+        $product = $productRepository->find($productId);
+        if ($product->getIsOnline()) {
+            $product->setIsOnline(false);
+        } else {
+            $product->setIsOnline(true);
+        }
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('user_dashboard');
     }
 }
