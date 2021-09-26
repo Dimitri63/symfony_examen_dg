@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\User;
+use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,6 +17,27 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ApiRestController extends AbstractController
 {
+
+    /**
+     * @param ProductRepository $productRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
+    #[Route('/products', name: 'getAllProducts', methods: 'GET')]
+    public function getAllProducts(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $products = $productRepository->findAll();
+
+        $products = $serializer->serialize($products, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($products, 200, [], true);
+    }
+
     /**
      * @param Request $request
      * @param EntityManagerInterface $entityManager
@@ -52,6 +74,26 @@ class ApiRestController extends AbstractController
         ]);
 
         return new JsonResponse($product, 200, [], true);
+    }
+
+    /**
+     * @param ProductRepository $productRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
+    #[Route('/products/online', name: 'getAllProductsIsOnline', methods: 'GET')]
+    public function getAllProductsIsOnline(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $products = $productRepository->findBy(['isOnline' => true]);
+
+        $products = $serializer->serialize($products, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($products, 200, [], true);
     }
 
 }

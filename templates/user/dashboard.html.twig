@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {%  include('include/nav.html.twig') %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Dashboard</h3>
+                <table class="table">
+                    <thead>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Img Miniature</th>
+                    <th>Date de d'ajout</th>
+                    <th>En ligne</th>
+                    <th>Prix</th>
+                    </thead>
+                    {% for product in products %}
+                        <tbody>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>
+                            <img style="max-height: 25px" src="{{ asset(image_dir ~ product.imgMiniature ) }}" alt="img-{{ product.id }}" />
+                        </td>
+                        <td>{{ product.addedAt|date("m/d/Y") }}</td>
+                        <td>
+                            {% if product.isOnline %}
+                                <a href="{{ path('toggleStatus', {productId: product.id}) }}"><button class="btn btn-outline-danger">Retirer de la vente</button></a>
+                            {% else %}
+                                <a href="{{ path('toggleStatus', {productId: product.id}) }}"><button class="btn btn-outline-success">Mettre en vente</button></a>
+                            {% endif %}
+                        </td>
+                        <td>{{ product.price|round(2, 'floor') }}</td>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

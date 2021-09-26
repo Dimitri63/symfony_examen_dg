@@ -19,6 +19,11 @@
                         <a class="nav-link" href="{{ path('add_product') }}"><button class="btn btn-outline-info">Ajouter un produit</button></a>
                     </li>
                 {% endif %}
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_dashboard') }}"><button class="btn btn-outline-info">Votre dashboard</button></a>
+                    </li>
+                {% endif %}
 
                 <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                 <li class="nav-item dropdown">

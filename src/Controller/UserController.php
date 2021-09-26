@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserRegisterType;
+use App\Repository\ProductRepository;
 use App\Repository\RoleRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,5 +44,16 @@ class UserController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error,
             'userForm' => $userForm->createView()]);
+    }
+
+    #[Route('/user/dashboard', name: 'user_dashboard')]
+    public function userDashboard(ProductRepository $productRepository, UserRepository $userRepository): Response {
+        $user = $userRepository->find($this->getUser());
+
+        $products = $productRepository->findBy(["User" => $user]);
+
+        return $this->render('user/dashboard.html.twig',[
+            'products' => $products
+        ]);
     }
 }
