@@ -11,10 +11,13 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 {% if is_granted('ROLE_USER') %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}"><button class="btn btn-outline-info">Home</button></a>
+                        <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}"><button class="btn btn-outline-info">Parcourir</button></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('user_dashboard') }}"><button class="btn btn-outline-info">Votre dashboard</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('user_dashboard') }}"><button class="btn btn-outline-info">Paramètres</button></a>
                     </li>
                 {% endif %}
             </ul>
