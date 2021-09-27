@@ -1,5 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+    {%  include('include/nav.html.twig') %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img class="img-fluid" src="{{ asset(image_dir ~ '1899535107_small_1.jpg ') }}" alt="img">
+                <div class="card-body">
+                    <h5 class="card-title">Improviser</h5>
+                    <p class="card-text"><strong>1.</strong> Produire, élaborer un discours, un texte, un morceau de musique directement, sans préparation</p>
+                    <p class="card-text"><strong>2.</strong> Faire quelque chose d'emblée et sans préparation aucune, avec les moyens du bord</p>
+                    <p class="card-text"><strong>2.</strong> Placer quelqu'un dans une fonction dont il n'a pas l'habitude, à laquelle il n'est pas préparé</p>
+                    <p class="card-text"><small class="text-muted"> être improvisé</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
