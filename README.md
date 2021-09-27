@@ -1,5 +1,11 @@
 #Examen 'symfony' Dimitri GRUYER
 
+bug à corrigé<br>
+<p style="color: orange">
+Lors de la 1er connection du compte moderator, => redirection vers le template /home (non autorisé),
+Retour arriere, rafraichir page login == direction correct vers le dashboard moderator !!
+</p>
+
 make:entity => Product <br>
 - Product
     - id - <strong>integer</strong>
