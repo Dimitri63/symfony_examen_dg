@@ -1,5 +1,9 @@
 #Examen 'symfony' Dimitri GRUYER
-
+              /\
+             /  \            J'utilise une classe pour instancier mes objets 'ROLE' donc bien veillez à faire
+            / || \           un doctrine:schema:update !!   
+           /  ..  \
+           --------
 bug à corrigé<br>
 <p style="color: orange">
 Lors de la 1er connection du compte moderator, => redirection vers le template /home (non autorisé),
