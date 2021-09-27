@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Entity\Role;
 use App\Entity\User;
+use App\Repository\ProductRepository;
 use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -80,5 +82,104 @@ class PublicRestController extends AbstractController
         ]);
 
         return new JsonResponse($users, 200, [], true);
+    }
+
+    /**
+     * @param int $userId
+     * @param UserRepository $userRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
+    #[Route('/public/user/{userId}', name: 'getUserById', methods: 'GET')]
+    public function getUserById(int $userId, UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $user = $userRepository->find($userId);
+
+        $user = $serializer->serialize($user, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($user, 200, [], true);
+    }
+
+    /**
+     * @param ProductRepository $productRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
+    #[Route('/public/products', name: 'getAllProducts', methods: 'GET')]
+    public function getAllProducts(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $products = $productRepository->findAll();
+
+        $products = $serializer->serialize($products, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($products, 200, [], true);
+    }
+
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    #[Route('/public/product', name: 'postNewProduct', methods: 'POST')]
+    public function postNewProduct(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer, UserRepository $userRepository): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $product = new Product();
+        $product->setName($data['name']);
+        $product->setImgMiniature($data['img_miniature']);
+        $product->setPrice($data['price']);
+        $product->setAddedAt(new \DateTime($data['added_at']));
+        $product->setIsOnline($data['isOnline']);
+        $product->setImg1($data['img1']);
+        $product->setImg2($data['img2']);
+        $product->setImg3($data['img3']);
+
+        $user = $userRepository->find($data['user']);
+        $product->setUser($user);
+
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        $product = $serializer->serialize($product, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($product, 200, [], true);
+    }
+
+    /**
+     * @param ProductRepository $productRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
+    #[Route('/public/products/online', name: 'getAllProductsIsOnline', methods: 'GET')]
+    public function getAllProductsIsOnline(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $products = $productRepository->findBy(['isOnline' => true]);
+
+        $products = $serializer->serialize($products, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($products, 200, [], true);
     }
 }
