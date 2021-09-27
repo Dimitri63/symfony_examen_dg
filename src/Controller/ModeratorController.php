@@ -88,20 +88,29 @@ class ModeratorController extends AbstractController
             $entityManager->flush();
         }
 
-        $users = [$randomUser1, $randomUser2, $randomUser3];
-        $images = ["6151814c2ea26.png", "6151814c2ea26.png", "61518dec72bee.jpg", "61518dfe3ebb6.jpg", "61518e1618976.jpg", "61518e45962bc.jpg", "61518e5bd8e9b.jpg"];
-        for ($i = 0; $i < 150; $i++) {
-            $randomUser = $users[array_rand($users)];
-            $product = new Product();
-            $product->setName("randomProduct".$i);
-            $product->setDescription("dqdqsdqsqsdqdqsdsdqdqdqsdqs");
-            $product->setImgMiniature($images[array_rand($images)]);
-            $product->setAddedAt(new \DateTime());
-            $product->setIsOnline((bool)rand(0,1));
-            $product->setUser($randomUser);
-            $product->setPrice(rand(1, 2000));
+        $users = [];
+        $allUsers = $userRepository->findAll();
+        foreach ($allUsers as $user) {
+            if (in_array('ROLE_USER', $user->getRoles())) {
+                array_push($users, $user);
+            }
+        }
+        $images = ["avion.PNG", "canard.jpg", "casquette.jpg", "chau0000.png", "chaussettes.jpg", "manteau.jpg"];
+        if ($users != null) {
+            for ($i = 0; $i < 150; $i++) {
+                $randomUser = $users[array_rand($users)];
+                $image = $images[array_rand($images)];
+                $product = new Product();
+                $product->setName("random Product ".substr($image, 0, -4).$i);
+                $product->setDescription("Description " .substr($image, 0, -4));
+                $product->setImgMiniature($image);
+                $product->setAddedAt(new \DateTime());
+                $product->setIsOnline((bool)rand(0,1));
+                $product->setUser($randomUser);
+                $product->setPrice(rand(1, 2000));
 
-            $entityManager->persist($product);
+                $entityManager->persist($product);
+            }
         }
 
         $entityManager->flush();

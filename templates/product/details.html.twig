@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {%  include('include/nav.html.twig') %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="{{ asset(image_dir ~ product.imgMiniature ) }}" alt="img-{{ product.id }}" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{ product.name }}</h5>
+                                <!-- Product price-->
+                                ${{ product.price|round(2, 'floor') }}
+                            </div>
+                            <div class="text-center">
+                                <h5 class="fw-bolder">Description</h5>
+                                {{ product.description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
