@@ -67,4 +67,13 @@ class ProductController extends AbstractController
 
         return $this->redirectToRoute('user_dashboard');
     }
+
+    #[Route('app/product/details/{productId}', name: 'detailsProduct')]
+    public function detailsProduct(int $productId, ProductRepository $productRepository, EntityManagerInterface $entityManager) {
+        $product = $productRepository->find($productId);
+
+        return $this->render('product/details.html.twig', [
+            'product' => $product,
+        ]);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Form\RegisterType;
 use App\Form\UserRegisterType;
@@ -22,6 +23,22 @@ class SecurityController extends AbstractController
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils, UserPasswordHasherInterface $userPasswordHasher, RoleRepository $roleRepository, EntityManagerInterface $entityManager): Response
     {
+        if ($roleRepository->findBy(['role' => 'ROLE_USER']) == null) {
+            $role = new Role();
+            $role->setRole('ROLE_USER');
+            $entityManager->persist($role);
+        }
+        if ($roleRepository->findBy(['role' => 'ROLE_MODERATOR']) == null) {
+            $role = new Role();
+            $role->setRole('ROLE_MODERATOR');
+            $entityManager->persist($role);
+        }
+        if ($roleRepository->findBy(['role' => 'ROLE_ADMIN']) == null) {
+            $role = new Role();
+            $role->setRole('ROLE_ADMIN');
+            $entityManager->persist($role);
+        }
+        $entityManager->flush();
 
         if ($this->getUser()) {
             if (in_array('ROLE_MODERATOR', $this->getUser()->getRoles())) {

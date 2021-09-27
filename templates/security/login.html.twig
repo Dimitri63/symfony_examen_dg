@@ -11,7 +11,7 @@
 
             <div class="col-sm-5 mt-5">
                 {% if moderatorExist() == true %}
-                    <div class="card">
+                    <div class="card">Espace DEV
                         <div class="m-1"><h4>Account Moderator</h4>
                             <p>email : <strong>moderator@mod.com</strong><br>
                                 password : <strong>123456789</strong></p>
@@ -23,7 +23,7 @@
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
 
-                    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <h1 class="h3 mb-3 font-weight-normal">Connection</h1>
                     <label for="inputEmail">Email</label>
                     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
                     <label for="inputPassword">Password</label>
@@ -39,8 +39,8 @@
 
                 {% if moderatorExist() == false %}
                     <form action="/dev/moderator" method="post">
-                        <div class="mt-5 p-5" style="background-color: #3dd5f3">
-                            <h3>Créer un comte moderateur</h3>
+                        <div class="mt-5 p-5" style="background-color: #3dd5f3">Espace DEV
+                            <h3>Créer un compte moderateur</h3>
                             <p>le compte moderateur permet d'utiliser un script qui ajoutera 150 articles aléatoires</p>
                             <button type="submit" class="btn btn-outline-danger">Ajouter un compte moderator</button>
                         </div>

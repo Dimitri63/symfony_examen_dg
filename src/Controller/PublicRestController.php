@@ -182,4 +182,41 @@ class PublicRestController extends AbstractController
 
         return new JsonResponse($products, 200, [], true);
     }
+
+    /**
+     * @param ProductRepository $productRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
+    #[Route('/public/products/online/user/{userId}', name: 'getAllProductsIsOnlineByUser', methods: 'GET')]
+    public function getAllProductsIsOnlineByUser(int $userId, ProductRepository $productRepository, SerializerInterface $serializer, UserRepository $userRepository): JsonResponse
+    {
+        $user = $userRepository->find($userId);
+        $products = $productRepository->findBy(['isOnline' => true, 'User' => $user]);
+
+        $products = $serializer->serialize($products, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($products, 200, [], true);
+    }
+
+
+    #[Route('/public/products/{page}', name: 'getAllProductsIsOnlineByPage', methods: 'GET')]
+    public function getAllProductsIsOnlineByPage(int $page, Request $request, ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $page = $page * 20 - 20;
+        $products = $productRepository->findBy(['isOnline' => true], null, 20, $page);
+        $products = $serializer->serialize($products, "json", [
+            AbstractObjectNormalizer::ENABLE_MAX_DEPTH => true,
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
+        return new JsonResponse($products, 200, [], true);
+    }
 }

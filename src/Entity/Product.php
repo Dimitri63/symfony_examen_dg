@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
@@ -38,27 +40,13 @@ class Product
     private $isOnline;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $img1;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $img2;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $img3;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $price;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="products")
+     * @MaxDepth(1)
      */
     private $User;
 
@@ -116,42 +104,6 @@ class Product
     public function setIsOnline(bool $isOnline): self
     {
         $this->isOnline = $isOnline;
-
-        return $this;
-    }
-
-    public function getImg1(): ?string
-    {
-        return $this->img1;
-    }
-
-    public function setImg1(?string $img1): self
-    {
-        $this->img1 = $img1;
-
-        return $this;
-    }
-
-    public function getImg2(): ?string
-    {
-        return $this->img2;
-    }
-
-    public function setImg2(?string $img2): self
-    {
-        $this->img2 = $img2;
-
-        return $this;
-    }
-
-    public function getImg3(): ?string
-    {
-        return $this->img3;
-    }
-
-    public function setImg3(?string $img3): self
-    {
-        $this->img3 = $img3;
 
         return $this;
     }
