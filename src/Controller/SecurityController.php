@@ -8,6 +8,7 @@ use App\Form\UserRegisterType;
 use App\Repository\RoleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -23,7 +24,11 @@ class SecurityController extends AbstractController
     {
 
         if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
+            if (in_array('ROLE_MODERATOR', $this->getUser()->getRoles())) {
+
+                return $this->redirectToRoute('moderator_dashboard');
+            }
+            return $this->redirectToRoute('user_dashboard');
         }
 
         // get the login error if there is one

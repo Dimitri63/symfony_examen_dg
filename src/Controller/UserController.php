@@ -26,6 +26,7 @@ class UserController extends AbstractController
         if ($userForm->isSubmitted() && $userForm->isValid()) {
 
             $user->setPassword($userPasswordHasher->hashPassword($user, $user->getPassword()));
+            // $role = $roleRepository->findBy(['role' => 'ROLE_USER'],null,20, ($page-1)*20);
             $role = $roleRepository->findBy(['role' => 'ROLE_USER']);
             $user->setRoles($role);
 

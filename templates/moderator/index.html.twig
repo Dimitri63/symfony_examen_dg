@@ -1,12 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Hello ModeratorController!{% endblock %}
+
 {% block body %}
     {%  include('include/nav.html.twig') %}
     <div class="container">
         <div class="row">
             <div class="col">
                 <h3>Dashboard</h3>
-                <a class="nav-link" href="{{ path('add_product') }}"><button class="btn btn-outline-info">Ajouter un produit</button></a>
+                {% if products|length < 100 %}
+                    <a href="{{ path('moderator_script') }}"><button class="btn btn-outline-danger">Script add 150 products</button></a>
+                {% endif %}
                 <table class="table">
                     <thead>
                     <th>Id</th>
@@ -14,6 +18,7 @@
                     <th>Img Miniature</th>
                     <th>Date de d'ajout</th>
                     <th>En ligne</th>
+                    <th>Owner</th>
                     <th>Prix</th>
                     </thead>
                     {% for product in products %}
@@ -26,10 +31,22 @@
                         <td>{{ product.addedAt|date("m/d/Y") }}</td>
                         <td>
                             {% if product.isOnline %}
-                                <a href="{{ path('toggleStatus', {productId: product.id}) }}"><button class="btn btn-outline-danger">Retirer de la vente</button></a>
+                                <span class="badge badge-success">En ligne</span>
                             {% else %}
-                                <a href="{{ path('toggleStatus', {productId: product.id}) }}"><button class="btn btn-outline-success">Mettre en vente</button></a>
+                                <span class="badge badge-danger">Hors ligne</span>
                             {% endif %}
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User id={{ product.User.id }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <p class="dropdown-item">{{ product.User.name }}</p>
+                                    <p class="dropdown-item">{{ product.User.surname }}</p>
+                                    <p class="dropdown-item">{{ product.User.email }}</p>
+                                </div>
+                            </div>
                         </td>
                         <td>{{ product.price|round(2, 'floor') }}</td>
                         </tbody>
