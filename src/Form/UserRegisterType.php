@@ -60,12 +60,6 @@ class UserRegisterType extends AbstractType
             ])
             ->add('cgu', CheckboxType::class, [
                 'label' => 'CGU',
-                'label_attr' => [
-                    'class' => 'form-check-label'
-                ],
-                'attr' => [
-                    'class' => 'form-check-input'
-                ],
                 'mapped' =>false,
                 'constraints' => [
                     new IsTrue(['message' => "Vous devez accepter les conditions"])
