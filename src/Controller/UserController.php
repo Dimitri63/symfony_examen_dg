@@ -57,4 +57,12 @@ class UserController extends AbstractController
             'products' => $products
         ]);
     }
+
+    #[Route('/user/settings', name: 'user_settings')]
+    public function userSettings(): Response {
+
+
+        return $this->render('user/setting.html.twig');
+    }
+
 }
