@@ -36,7 +36,11 @@ class ProductController extends AbstractController
             }
 
             $product->setAddedAt(new \DateTime());
-
+            if ($productForm['isOnline']->getData()) {
+                $product->setIsOnline(false);
+            } else {
+                $product->setIsOnline(true);
+            }
             $user = $userRepository->find($this->getUser());
             $product->setUser($user);
             $entityManager->persist($product);
