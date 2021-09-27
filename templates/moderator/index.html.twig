@@ -3,18 +3,56 @@
 {% block title %}Hello ModeratorController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Users/DGnex/Documents/Formation_CDA/Cours/labs/symfony/examen/symfony_examen_dg/src/Controller/ModeratorController.php'|file_link(0) }}">src/Controller/ModeratorController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Users/DGnex/Documents/Formation_CDA/Cours/labs/symfony/examen/symfony_examen_dg/templates/moderator/index.html.twig'|file_link(0) }}">templates/moderator/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {%  include('include/nav.html.twig') %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Dashboard</h3>
+                {% if products|length < 100 %}
+                    <a href="{{ path('moderator_script') }}"><button class="btn btn-outline-danger">Script add 150 products</button></a>
+                {% endif %}
+                <table class="table">
+                    <thead>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Img Miniature</th>
+                    <th>Date de d'ajout</th>
+                    <th>En ligne</th>
+                    <th>Owner</th>
+                    <th>Prix</th>
+                    </thead>
+                    {% for product in products %}
+                        <tbody>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.name }}</td>
+                        <td>
+                            <img style="max-height: 25px" src="{{ asset(image_dir ~ product.imgMiniature ) }}" alt="img-{{ product.id }}" />
+                        </td>
+                        <td>{{ product.addedAt|date("m/d/Y") }}</td>
+                        <td>
+                            {% if product.isOnline %}
+                                <span class="badge badge-success">En ligne</span>
+                            {% else %}
+                                <span class="badge badge-danger">Hors ligne</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User id={{ product.User.id }}
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <p class="dropdown-item">{{ product.User.name }}</p>
+                                    <p class="dropdown-item">{{ product.User.surname }}</p>
+                                    <p class="dropdown-item">{{ product.User.email }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ product.price|round(2, 'floor') }}</td>
+                        </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}
