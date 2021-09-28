@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "f7899023-1adc-4834-bb1c-6487a1f08b1d",
+		"name": "symfony_examen",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.199:8000/public/users",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"public",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUserById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.199:8000/user/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postNewUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"DGnex\",\r\n    \"surname\" : \"NEXUS\",\r\n    \"email\" : \"dgnex@mail.com\",\r\n    \"password\" : \"1234\",\r\n    \"roles\" : [\r\n        \"ROLE_USER\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.199:8000/user",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.199:8000/public/products",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"public",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.199:8000/product/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"product",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postNewProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Chaussure homme\",\r\n    \"img_miniature\" : \"chau0000.jpeg\",\r\n    \"added_at\" : \"2021-12-12\",\r\n    \"price\" : 50.00,\r\n    \"isOnline\" : true,\r\n    \"client\" : 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://192.168.0.199:8000/product",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductByUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.199:8000/public/product/user/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"public",
+						"product",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductByUserAndIsOnline",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.199:8000/product/user/1/online",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"product",
+						"user",
+						"1",
+						"online"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllProductIsOnlineByPage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://192.168.0.199:8000/public/products/1",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"0",
+						"199"
+					],
+					"port": "8000",
+					"path": [
+						"public",
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
