@@ -4,13 +4,23 @@
             / || \           un doctrine:schema:update !!   
            /  ..  \
            --------
-bug à corrigé<br>
+
+
+<h1 style="color: #0dcaf0">BUG connus</h1>
 <p style="color: orange">
 Lors de la 1er connection du compte moderator, => redirection vers le template /home (non autorisé),
 Retour arriere, rafraichir page login == direction correct vers le dashboard moderator !!
 </p>
+<p style="color: orange">
+Au lancement de l'application la route par défaut est rediriger vers /login. Cepedant, 
+sans un premier raffraichissement de cette page, les authentifications ne fonctionne pas !!
+</p>
 
-make:entity => Product <br>
+<h2 style="color: yellow">ENTITY</h2>
+<h3 style="color: #0dcaf0">PRODUCT</h3>
+
+<span style="text-decoration: underline">make:entity => Product</span>
+
 - Product
     - id - <strong>integer</strong>
     - name - <strong>string</strong>
@@ -18,14 +28,12 @@ make:entity => Product <br>
     - price - <strong>float</strong>
     - addedAt - <strong>datetime</strong>
     - isOnline - <strong>boolean</strong>
-    - img1 - <strong>string</strong>
-    - img2 - <vstrong>string</strong>
-    - img3 - <strong>string</strong>
     - price - <strong>float</strong>
 
-php .\bin\console doctrine:schema:update --force
+<small style="color: gray">php .\bin\console doctrine:schema:update --force</small>
 
-make:entity => User <br>
+<h3 style="color: #0dcaf0">USER</h3>
+<span style="text-decoration: underline">make:entity => User</span>
 - User
   - id - <strong>integer</strong>
   - name - <strong>string</strong>
@@ -33,41 +41,50 @@ make:entity => User <br>
   - email - <strong>float</strong>
   - password - <strong>datetime</strong>
 
-Modifier entity Product
+<small style="color: gray">php .\bin\console doctrine:schema:update --force</small>
+
+<span style="text-decoration: underline">Modifier entity Product</span>
+
 - Client - <strong>Entity=User</strong></li>
-- updated: src/Entity/Product.php
-- updated: src/Entity/User.php
+  - updated: src/Entity/Product.php
+  - updated: src/Entity/User.php
 
-php .\bin\console doctrine:schema:update --force
+<small style="color: gray">php .\bin\console doctrine:schema:update --force</small>
 
-Add Entity Role
-Add UserInterface, PasswordAuthenticatedUserInterface dans User
-make:entity => Role <br>
-- User
+
+<span style="text-decoration: underline">Modifier entity User</span>
+
+- Implementation 
+  - IMPLEMENT => UserInterface, PasswordAuthenticatedUserInterface dans User
+
+<h3 style="color: #0dcaf0">ROLE</h3>
+  <span style="text-decoration: underline">make:entity => Role</span>
+- Role
   - id - <strong>integer</strong>
   - role - <strong>string</strong>
+
+<small style="color: gray">php .\bin\console doctrine:schema:update --force</small>
 
 Modifier entity User
 - Roles - <strong>Entity=Role</strong></li>
 - updated: src/Entity/Role.php
 - updated: src/Entity/User.php
 
-php .\bin\console doctrine:schema:update --force
+<small style="color: gray">php .\bin\console doctrine:schema:update --force</small>
 
+<h2 style="color: yellow">CONTROLLERS</h2>
+<h3 style="color: #0dcaf0">HOME</h3>
+<span style="text-decoration: underline">make:controller => Home</span>
 
-make:controller => Home<br>
-- /app/home
-  - method => getAllProductIsOnline<br>
-  - 
 -Template home.html.twig
   - Ajout du template Bootstrap 'Shop'<br>
     https://startbootstrap.com/template/shop-item
 
-Tester l'injection de données <br>
+<h3 style="color: #0dcaf0">PublicRestController</h3>
+<span style="text-decoration: underline">make:controller => PublicRest</span>
 
-make:controller => ApiRest<br>
 [Route('/public/user', name: 'postNewUser', methods: 'POST')]<br>
-postman :<br>
+<span style="color: red">postman</span> :<br>
 {<br>
 "name" : "DGnex",<br>
 "surname" : "NEXUS",<br>
@@ -77,7 +94,7 @@ postman :<br>
 }<br>
 
 [Route('/api/product', name: 'postNewProduct', methods: 'POST')]<br>
-postman : <br>
+<span style="color: red">postman</span> :<br>
 {<br>
   "name" : "basket homme",<br>
   "img_miniature" : "chau0000.jpeg",<br>
@@ -90,28 +107,17 @@ postman : <br>
   "user" : 1<br>
 }<br>
 
-- Configure viariable global pour les image
+<h2 style="color: yellow">CONFIGURATIONS</h2>
+<h3 style="color: #0dcaf0">VARIABLES</h3>
+<span style="text-decoration: underline">Configure viariable global pour les images</span><small> => config/packages/twig.yaml</small>
 - globals:
-  image_dir: 'assets/img/upload/'
+  - image_dir: 'assets/img/upload/'
 
-Ajouter  make:auth<br>
+<h2 style="color: yellow">AUTHENTIFICATOR</h2>
+<h3 style="color: #0dcaf0">AUTH</h3>
+<span style="text-decoration: underline">make:auth</span>
 => SecurityController<br>
-Ajouter make:form
+
+<span style="text-decoration: underline">make:form</span>
 => UserRegisterType<br>
-Modifier SecurityController<br>
-=> Afficher le formulaire register sur la même page<br>
-
-Ajouter make:controller<br>
-=> UserController
-- Methode /user/register
-=> Récupérer et interpréter les données du formulaire 
-
-Ajouter un produit<br>
-
-
-
-
-Modifier 
-
-modifier publicRestController Add user
 
