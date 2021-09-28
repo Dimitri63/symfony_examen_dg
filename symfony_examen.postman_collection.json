@@ -11,7 +11,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.0.199:8000/public/users",
+					"raw": "http://192.168.0.199:8001/public/users",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -19,7 +19,7 @@
 						"0",
 						"199"
 					],
-					"port": "8000",
+					"port": "8001",
 					"path": [
 						"public",
 						"users"
@@ -34,7 +34,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.0.199:8000/user/1",
+					"raw": "http://192.168.0.199:8001/public/user/1",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -42,8 +42,9 @@
 						"0",
 						"199"
 					],
-					"port": "8000",
+					"port": "8001",
 					"path": [
+						"public",
 						"user",
 						"1"
 					]
@@ -58,7 +59,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\" : \"DGnex\",\r\n    \"surname\" : \"NEXUS\",\r\n    \"email\" : \"dgnex@mail.com\",\r\n    \"password\" : \"1234\",\r\n    \"roles\" : [\r\n        \"ROLE_USER\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"name\" : \"DGnex25\",\r\n    \"surname\" : \"NEXUS\",\r\n    \"email\" : \"dgnex@mail.com25\",\r\n    \"password\" : \"1234\",\r\n    \"roles\" : [\r\n        \"ROLE_USER\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -66,7 +67,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://192.168.0.199:8000/user",
+					"raw": "http://192.168.0.199:8001/public/user",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -74,8 +75,9 @@
 						"0",
 						"199"
 					],
-					"port": "8000",
+					"port": "8001",
 					"path": [
+						"public",
 						"user"
 					]
 				}
@@ -88,7 +90,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.0.199:8000/public/products",
+					"raw": "http://192.168.0.199:8001/public/products",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -96,33 +98,10 @@
 						"0",
 						"199"
 					],
-					"port": "8000",
+					"port": "8001",
 					"path": [
 						"public",
 						"products"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getProductById",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://192.168.0.199:8000/product/1",
-					"protocol": "http",
-					"host": [
-						"192",
-						"168",
-						"0",
-						"199"
-					],
-					"port": "8000",
-					"path": [
-						"product",
-						"1"
 					]
 				}
 			},
@@ -190,7 +169,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://192.168.0.199:8000/product/user/1/online",
+					"raw": "http://192.168.0.199:8001/public/products/online/user/2",
 					"protocol": "http",
 					"host": [
 						"192",
@@ -198,12 +177,13 @@
 						"0",
 						"199"
 					],
-					"port": "8000",
+					"port": "8001",
 					"path": [
-						"product",
+						"public",
+						"products",
+						"online",
 						"user",
-						"1",
-						"online"
+						"2"
 					]
 				}
 			},
