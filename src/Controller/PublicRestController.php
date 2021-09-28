@@ -143,9 +143,6 @@ class PublicRestController extends AbstractController
         $product->setPrice($data['price']);
         $product->setAddedAt(new \DateTime($data['added_at']));
         $product->setIsOnline($data['isOnline']);
-        $product->setImg1($data['img1']);
-        $product->setImg2($data['img2']);
-        $product->setImg3($data['img3']);
 
         $user = $userRepository->find($data['user']);
         $product->setUser($user);
