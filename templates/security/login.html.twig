@@ -19,6 +19,7 @@
                     </div>
                 {% endif %}
                 <form method="post">
+                    <a href="/login">problème de login ?</a>
                     {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
