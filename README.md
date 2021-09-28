@@ -12,8 +12,8 @@ Lors de la 1er connection du compte moderator, => redirection vers le template /
 Retour arriere, rafraichir page login == direction correct vers le dashboard moderator !!
 </p>
 <p style="color: orange">
-Au lancement de l'application la route par défaut est rediriger vers /login. Cepedant, 
-sans un premier raffraichissement de cette page, les authentifications ne fonctionne pas !!
+Au lancement de l'application la route par défaut est rediriger vers /login. Cepedant, les 
+authentifications ne fonctionne pas !! Solution trouvé : <span style="color: #25cff2">Bouton qui force l'url /login</span>
 </p>
 
 <h2 style="color: yellow">ENTITY</h2>
